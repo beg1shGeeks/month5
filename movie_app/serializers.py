@@ -8,7 +8,7 @@ from .models import (
 class DirectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Director
-        fields = '__all__'
+        fields = 'id name movies_count'.split()
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,3 +19,9 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
+
+class MovieReviewSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(many=True)
+    class Meta:
+        model = Movie
+        fields = 'title rating reviews'.split()

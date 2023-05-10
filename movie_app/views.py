@@ -9,7 +9,8 @@ from .models import (
 from .serializers import (
     DirectorSerializer,
     MovieSerializer,
-    ReviewSerializer
+    ReviewSerializer,
+    MovieReviewSerializer
                           )
 
 
@@ -48,6 +49,15 @@ def movie_list_api_view(request):
 
     """ Return dict objects by JSON file """
     return Response(data=movie_json)
+
+@api_view(['GET'])
+def movie_review_list_api_view(request):
+
+    movie_review_list = Movie.objects.all()
+
+    movie_review_json = MovieReviewSerializer(instance=movie_review_list, many=True).data
+
+    return Response(data=movie_review_json)
 
 @api_view(['GET'])
 def movie_detail_api_view(request, id):
