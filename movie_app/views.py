@@ -149,7 +149,7 @@ class ReviewDetailAPIView(RetrieveUpdateDestroyAPIView):
 
     def put(self, request, *args, **kwargs):
         try:
-            item = Review.objects.get(id=id)
+            item = Review.objects.get(id=kwargs['id'])
         except Review.DoesNotExist:
             return Response(data={'error': 'Review not found'}, status=status.HTTP_404_NOT_FOUND)
 
